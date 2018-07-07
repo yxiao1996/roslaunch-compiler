@@ -1,0 +1,523 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NEWLINE
+
+Grammar
+
+Rule 0     S' -> module
+Rule 1     module -> MODULE name LPAREN input_list output_list node_list assign_list RPAREN
+Rule 2     module -> error
+Rule 3     input -> INPUT topic
+Rule 4     input_list -> input_list input
+Rule 5     input_list -> input
+Rule 6     output -> OUTPUT topic
+Rule 7     output_list -> output_list output
+Rule 8     output_list -> output
+Rule 9     node -> NODE LPAREN node_info RPAREN
+Rule 10    node_info -> NAME name input_list output_list pack exec
+Rule 11    node_list -> node_list node
+Rule 12    node_list -> node
+Rule 13    exec -> EXEC name
+Rule 14    pack -> PACK name
+Rule 15    assign -> ASSIGN topic EQUALS topic
+Rule 16    assign_list -> assign_list assign
+Rule 17    assign_list -> assign
+Rule 18    topic -> topic DIVIDE name
+Rule 19    topic -> DIVIDE name
+Rule 20    name -> ID
+Rule 21    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ASSIGN               : 15
+DIVIDE               : 18 19
+EQUALS               : 15
+EXEC                 : 13
+ID                   : 20
+INPUT                : 3
+LPAREN               : 1 9
+MODULE               : 1
+NAME                 : 10
+NEWLINE              : 
+NODE                 : 9
+OUTPUT               : 6
+PACK                 : 14
+RPAREN               : 1 9
+error                : 2
+
+Nonterminals, with rules where they appear
+
+assign               : 16 17
+assign_list          : 1 16
+empty                : 
+exec                 : 10
+input                : 4 5
+input_list           : 1 4 10
+module               : 0
+name                 : 1 10 13 14 18 19
+node                 : 11 12
+node_info            : 9
+node_list            : 1 11
+output               : 7 8
+output_list          : 1 7 10
+pack                 : 10
+topic                : 3 6 15 15 18
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . module
+    (1) module -> . MODULE name LPAREN input_list output_list node_list assign_list RPAREN
+    (2) module -> . error
+
+    MODULE          shift and go to state 3
+    error           shift and go to state 2
+
+    module                         shift and go to state 1
+
+state 1
+
+    (0) S' -> module .
+
+
+
+state 2
+
+    (2) module -> error .
+
+    $end            reduce using rule 2 (module -> error .)
+
+
+state 3
+
+    (1) module -> MODULE . name LPAREN input_list output_list node_list assign_list RPAREN
+    (20) name -> . ID
+
+    ID              shift and go to state 4
+
+    name                           shift and go to state 5
+
+state 4
+
+    (20) name -> ID .
+
+    INPUT           reduce using rule 20 (name -> ID .)
+    DIVIDE          reduce using rule 20 (name -> ID .)
+    OUTPUT          reduce using rule 20 (name -> ID .)
+    NODE            reduce using rule 20 (name -> ID .)
+    PACK            reduce using rule 20 (name -> ID .)
+    EQUALS          reduce using rule 20 (name -> ID .)
+    RPAREN          reduce using rule 20 (name -> ID .)
+    ASSIGN          reduce using rule 20 (name -> ID .)
+    LPAREN          reduce using rule 20 (name -> ID .)
+    EXEC            reduce using rule 20 (name -> ID .)
+
+
+state 5
+
+    (1) module -> MODULE name . LPAREN input_list output_list node_list assign_list RPAREN
+
+    LPAREN          shift and go to state 6
+
+
+state 6
+
+    (1) module -> MODULE name LPAREN . input_list output_list node_list assign_list RPAREN
+    (4) input_list -> . input_list input
+    (5) input_list -> . input
+    (3) input -> . INPUT topic
+
+    INPUT           shift and go to state 8
+
+    input_list                     shift and go to state 7
+    input                          shift and go to state 9
+
+state 7
+
+    (1) module -> MODULE name LPAREN input_list . output_list node_list assign_list RPAREN
+    (4) input_list -> input_list . input
+    (7) output_list -> . output_list output
+    (8) output_list -> . output
+    (3) input -> . INPUT topic
+    (6) output -> . OUTPUT topic
+
+    INPUT           shift and go to state 8
+    OUTPUT          shift and go to state 13
+
+    output                         shift and go to state 10
+    output_list                    shift and go to state 11
+    input                          shift and go to state 12
+
+state 8
+
+    (3) input -> INPUT . topic
+    (18) topic -> . topic DIVIDE name
+    (19) topic -> . DIVIDE name
+
+    DIVIDE          shift and go to state 15
+
+    topic                          shift and go to state 14
+
+state 9
+
+    (5) input_list -> input .
+
+    INPUT           reduce using rule 5 (input_list -> input .)
+    OUTPUT          reduce using rule 5 (input_list -> input .)
+
+
+state 10
+
+    (8) output_list -> output .
+
+    PACK            reduce using rule 8 (output_list -> output .)
+    OUTPUT          reduce using rule 8 (output_list -> output .)
+    NODE            reduce using rule 8 (output_list -> output .)
+
+
+state 11
+
+    (1) module -> MODULE name LPAREN input_list output_list . node_list assign_list RPAREN
+    (7) output_list -> output_list . output
+    (11) node_list -> . node_list node
+    (12) node_list -> . node
+    (6) output -> . OUTPUT topic
+    (9) node -> . NODE LPAREN node_info RPAREN
+
+    OUTPUT          shift and go to state 13
+    NODE            shift and go to state 17
+
+    node                           shift and go to state 19
+    output                         shift and go to state 16
+    node_list                      shift and go to state 18
+
+state 12
+
+    (4) input_list -> input_list input .
+
+    INPUT           reduce using rule 4 (input_list -> input_list input .)
+    OUTPUT          reduce using rule 4 (input_list -> input_list input .)
+
+
+state 13
+
+    (6) output -> OUTPUT . topic
+    (18) topic -> . topic DIVIDE name
+    (19) topic -> . DIVIDE name
+
+    DIVIDE          shift and go to state 15
+
+    topic                          shift and go to state 20
+
+state 14
+
+    (3) input -> INPUT topic .
+    (18) topic -> topic . DIVIDE name
+
+    INPUT           reduce using rule 3 (input -> INPUT topic .)
+    OUTPUT          reduce using rule 3 (input -> INPUT topic .)
+    DIVIDE          shift and go to state 21
+
+
+state 15
+
+    (19) topic -> DIVIDE . name
+    (20) name -> . ID
+
+    ID              shift and go to state 4
+
+    name                           shift and go to state 22
+
+state 16
+
+    (7) output_list -> output_list output .
+
+    PACK            reduce using rule 7 (output_list -> output_list output .)
+    OUTPUT          reduce using rule 7 (output_list -> output_list output .)
+    NODE            reduce using rule 7 (output_list -> output_list output .)
+
+
+state 17
+
+    (9) node -> NODE . LPAREN node_info RPAREN
+
+    LPAREN          shift and go to state 23
+
+
+state 18
+
+    (1) module -> MODULE name LPAREN input_list output_list node_list . assign_list RPAREN
+    (11) node_list -> node_list . node
+    (16) assign_list -> . assign_list assign
+    (17) assign_list -> . assign
+    (9) node -> . NODE LPAREN node_info RPAREN
+    (15) assign -> . ASSIGN topic EQUALS topic
+
+    NODE            shift and go to state 17
+    ASSIGN          shift and go to state 26
+
+    assign                         shift and go to state 25
+    assign_list                    shift and go to state 24
+    node                           shift and go to state 27
+
+state 19
+
+    (12) node_list -> node .
+
+    NODE            reduce using rule 12 (node_list -> node .)
+    ASSIGN          reduce using rule 12 (node_list -> node .)
+
+
+state 20
+
+    (6) output -> OUTPUT topic .
+    (18) topic -> topic . DIVIDE name
+
+    PACK            reduce using rule 6 (output -> OUTPUT topic .)
+    OUTPUT          reduce using rule 6 (output -> OUTPUT topic .)
+    NODE            reduce using rule 6 (output -> OUTPUT topic .)
+    DIVIDE          shift and go to state 21
+
+
+state 21
+
+    (18) topic -> topic DIVIDE . name
+    (20) name -> . ID
+
+    ID              shift and go to state 4
+
+    name                           shift and go to state 28
+
+state 22
+
+    (19) topic -> DIVIDE name .
+
+    DIVIDE          reduce using rule 19 (topic -> DIVIDE name .)
+    RPAREN          reduce using rule 19 (topic -> DIVIDE name .)
+    ASSIGN          reduce using rule 19 (topic -> DIVIDE name .)
+    EQUALS          reduce using rule 19 (topic -> DIVIDE name .)
+    INPUT           reduce using rule 19 (topic -> DIVIDE name .)
+    OUTPUT          reduce using rule 19 (topic -> DIVIDE name .)
+    NODE            reduce using rule 19 (topic -> DIVIDE name .)
+    PACK            reduce using rule 19 (topic -> DIVIDE name .)
+
+
+state 23
+
+    (9) node -> NODE LPAREN . node_info RPAREN
+    (10) node_info -> . NAME name input_list output_list pack exec
+
+    NAME            shift and go to state 29
+
+    node_info                      shift and go to state 30
+
+state 24
+
+    (1) module -> MODULE name LPAREN input_list output_list node_list assign_list . RPAREN
+    (16) assign_list -> assign_list . assign
+    (15) assign -> . ASSIGN topic EQUALS topic
+
+    RPAREN          shift and go to state 32
+    ASSIGN          shift and go to state 26
+
+    assign                         shift and go to state 31
+
+state 25
+
+    (17) assign_list -> assign .
+
+    RPAREN          reduce using rule 17 (assign_list -> assign .)
+    ASSIGN          reduce using rule 17 (assign_list -> assign .)
+
+
+state 26
+
+    (15) assign -> ASSIGN . topic EQUALS topic
+    (18) topic -> . topic DIVIDE name
+    (19) topic -> . DIVIDE name
+
+    DIVIDE          shift and go to state 15
+
+    topic                          shift and go to state 33
+
+state 27
+
+    (11) node_list -> node_list node .
+
+    NODE            reduce using rule 11 (node_list -> node_list node .)
+    ASSIGN          reduce using rule 11 (node_list -> node_list node .)
+
+
+state 28
+
+    (18) topic -> topic DIVIDE name .
+
+    DIVIDE          reduce using rule 18 (topic -> topic DIVIDE name .)
+    RPAREN          reduce using rule 18 (topic -> topic DIVIDE name .)
+    ASSIGN          reduce using rule 18 (topic -> topic DIVIDE name .)
+    EQUALS          reduce using rule 18 (topic -> topic DIVIDE name .)
+    INPUT           reduce using rule 18 (topic -> topic DIVIDE name .)
+    OUTPUT          reduce using rule 18 (topic -> topic DIVIDE name .)
+    NODE            reduce using rule 18 (topic -> topic DIVIDE name .)
+    PACK            reduce using rule 18 (topic -> topic DIVIDE name .)
+
+
+state 29
+
+    (10) node_info -> NAME . name input_list output_list pack exec
+    (20) name -> . ID
+
+    ID              shift and go to state 4
+
+    name                           shift and go to state 34
+
+state 30
+
+    (9) node -> NODE LPAREN node_info . RPAREN
+
+    RPAREN          shift and go to state 35
+
+
+state 31
+
+    (16) assign_list -> assign_list assign .
+
+    RPAREN          reduce using rule 16 (assign_list -> assign_list assign .)
+    ASSIGN          reduce using rule 16 (assign_list -> assign_list assign .)
+
+
+state 32
+
+    (1) module -> MODULE name LPAREN input_list output_list node_list assign_list RPAREN .
+
+    $end            reduce using rule 1 (module -> MODULE name LPAREN input_list output_list node_list assign_list RPAREN .)
+
+
+state 33
+
+    (15) assign -> ASSIGN topic . EQUALS topic
+    (18) topic -> topic . DIVIDE name
+
+    EQUALS          shift and go to state 36
+    DIVIDE          shift and go to state 21
+
+
+state 34
+
+    (10) node_info -> NAME name . input_list output_list pack exec
+    (4) input_list -> . input_list input
+    (5) input_list -> . input
+    (3) input -> . INPUT topic
+
+    INPUT           shift and go to state 8
+
+    input_list                     shift and go to state 37
+    input                          shift and go to state 9
+
+state 35
+
+    (9) node -> NODE LPAREN node_info RPAREN .
+
+    NODE            reduce using rule 9 (node -> NODE LPAREN node_info RPAREN .)
+    ASSIGN          reduce using rule 9 (node -> NODE LPAREN node_info RPAREN .)
+
+
+state 36
+
+    (15) assign -> ASSIGN topic EQUALS . topic
+    (18) topic -> . topic DIVIDE name
+    (19) topic -> . DIVIDE name
+
+    DIVIDE          shift and go to state 15
+
+    topic                          shift and go to state 38
+
+state 37
+
+    (10) node_info -> NAME name input_list . output_list pack exec
+    (4) input_list -> input_list . input
+    (7) output_list -> . output_list output
+    (8) output_list -> . output
+    (3) input -> . INPUT topic
+    (6) output -> . OUTPUT topic
+
+    INPUT           shift and go to state 8
+    OUTPUT          shift and go to state 13
+
+    output                         shift and go to state 10
+    output_list                    shift and go to state 39
+    input                          shift and go to state 12
+
+state 38
+
+    (15) assign -> ASSIGN topic EQUALS topic .
+    (18) topic -> topic . DIVIDE name
+
+    RPAREN          reduce using rule 15 (assign -> ASSIGN topic EQUALS topic .)
+    ASSIGN          reduce using rule 15 (assign -> ASSIGN topic EQUALS topic .)
+    DIVIDE          shift and go to state 21
+
+
+state 39
+
+    (10) node_info -> NAME name input_list output_list . pack exec
+    (7) output_list -> output_list . output
+    (14) pack -> . PACK name
+    (6) output -> . OUTPUT topic
+
+    PACK            shift and go to state 40
+    OUTPUT          shift and go to state 13
+
+    output                         shift and go to state 16
+    pack                           shift and go to state 41
+
+state 40
+
+    (14) pack -> PACK . name
+    (20) name -> . ID
+
+    ID              shift and go to state 4
+
+    name                           shift and go to state 42
+
+state 41
+
+    (10) node_info -> NAME name input_list output_list pack . exec
+    (13) exec -> . EXEC name
+
+    EXEC            shift and go to state 43
+
+    exec                           shift and go to state 44
+
+state 42
+
+    (14) pack -> PACK name .
+
+    EXEC            reduce using rule 14 (pack -> PACK name .)
+
+
+state 43
+
+    (13) exec -> EXEC . name
+    (20) name -> . ID
+
+    ID              shift and go to state 4
+
+    name                           shift and go to state 45
+
+state 44
+
+    (10) node_info -> NAME name input_list output_list pack exec .
+
+    RPAREN          reduce using rule 10 (node_info -> NAME name input_list output_list pack exec .)
+
+
+state 45
+
+    (13) exec -> EXEC name .
+
+    RPAREN          reduce using rule 13 (exec -> EXEC name .)
+
