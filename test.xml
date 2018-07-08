@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<group>
+	<node name="bar" pkg="test0" type="test0.py"/>
+</group>
